@@ -6,6 +6,7 @@
 </head>
 <body>
 <h2> 이장헌의 질문 리스트 탬플릿</h2>
+
 <table>
 	<thead>
 		<tr>
@@ -15,7 +16,8 @@
 	</thead>
 	<tbody>
 		<tr th:each="question : ${questionList}">
-			<td th:text="${question.subject}"> </td>
+			<td><a th:href="@{|/question/detail/${question.id}|}"
+				th:text="${question.subject}"></a></td>
 			<td th:text="${question.createDate}"></td>
 		</tr>
 	</tbody>
