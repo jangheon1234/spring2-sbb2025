@@ -7,20 +7,27 @@
 <body>
 <h2> 이장헌의 질문 리스트 탬플릿</h2>
 
-<table>
-	<thead>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+
+<div class="container my-3">
+
+<table class="table">
+	<thead class="table-dark">
 		<tr>
+			<th>🔢</th>
 			<th>제목</th>
 			<th>작성일시</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="question : ${questionList}">
+		<tr th:each="question, loop : ${questionList}">
+			<td th:text="${loop.count}"></td>
 			<td><a th:href="@{|/question/detail/${question.id}|}"
 				th:text="${question.subject}"></a></td>
 			<td th:text="${question.createDate}"></td>
 		</tr>
 	</tbody>
 </table>
+</div>
 </body>
 </html>
