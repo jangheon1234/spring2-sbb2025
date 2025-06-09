@@ -2,7 +2,8 @@
 
 <div layout:fragment="content" class="container my-3">
 
-<h1>이장헌의 방명록입니다. 환영합니다. 5.19입니다</h1>
+<h1>이장헌의 방명록입니다. 환영합니다. 6.2입니다</h1>
+<h2>이 페이지는 스프링부트로 개발했습니다.</h2>
 <hr>
 <hr>
 
@@ -15,7 +16,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="question, loop : ${questionList}">
+		<tr th:each="question, loop : ${paging}">
 			<td th:text="${loop.count}"></td>
 			<td><a th:href="@{|/question/detail/${question.id}|}"
 				th:text="${question.subject}"></a></td>

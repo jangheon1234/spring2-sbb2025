@@ -11,6 +11,7 @@ import com.sg.ai.answer.Answer;
 import com.sg.ai.answer.AnswerRepository;
 import com.sg.ai.question.Question;
 import com.sg.ai.question.QuestionRepository;
+import com.sg.ai.question.QuestionService;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,7 +23,7 @@ class SbbApplicationTests {
 	private QuestionRepository questionRepository;
 	
 
-	@Test
+//	@Test
 	void testJpa() {
 		Question q1 = new Question();
 //		q1.content = "오늘이 며칠인가요";
@@ -45,7 +46,7 @@ class SbbApplicationTests {
 	@Autowired
 	private AnswerRepository answerRepository;
 	
-	@Test
+//	@Test
 	void testJpaa() {
 		Optional<Question> oq = this.questionRepository.findById(1);
 		assertTrue(oq.isPresent());
@@ -56,6 +57,18 @@ class SbbApplicationTests {
 		a.setQuestion(q);
 		a.setCreateDate(LocalDateTime.now());
 		this.answerRepository.save(a);
+	}
+	
+	// 페이지 기능을 구현하기위해, 300개의 게시물을 만듬
+	@Autowired
+	private QuestionService questionService;
+//	@Test
+	void testPage() {
+		for(int i=1; i<=300; i++) {
+			String subject = String.format("테스트용으로 만들었습니다: [%03d]", i);
+			String content = " 별 내용 없습니다. 2025년6월9일 마지막 수업 입니다.";
+			this.questionService.create(subject, content);
+		}
 	}
 
 }

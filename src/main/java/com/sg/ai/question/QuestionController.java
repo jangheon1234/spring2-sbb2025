@@ -3,6 +3,7 @@ package com.sg.ai.question;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +22,12 @@ public class QuestionController {
 	
 	@GetMapping("/question/list")
 //	@ResponseBody
-	public String list(Model model) {
-		
-		List<Question> questionList = this.questionService.getList();
-		model.addAttribute("questionList", questionList);
-		return "question_list";
-	}
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+        Page<Question> paging = this.questionService.getList(page);
+        model.addAttribute("paging", paging);
+        return "question_list";
+    }
+    
 	
 	@GetMapping("/question/detail/{id}")
 	public String detail(Model model, @PathVariable("id")Integer id) {
